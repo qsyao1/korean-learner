@@ -88,7 +88,7 @@ async function calculateStreaks(){const checkins=await getCheckins();if(!checkin
 async function getDueItems(){const today=getTodayStr();const all=await promisify(tx('reviewItems').getAll());return all.filter(i=>i.nextReview<=today)}
 async function getTotalReviewCount(){return(await promisify(tx('reviewItems').getAll())).length}
 
-async function seedReviewItems(day){const store=tx('reviewItems','readwrite');const content=getDayContent(day);if(!content)return;let idx=0;content.grammar.forEach(g=>{store.put({id:'g'+day+'_'+idx++,day,type:'grammar',point:g.point,meaning:g.explanation,nextReview:getTodayStr(),interval:0,easeFactor:2.5,repetitions:0})});idx=0;content.vocabulary.forEach(v=>{store.put({id:'v'+day+'_'+idx++,day,type:'vocabulary',word:v.word,meaning:v.meaning,nextReview:getTodayStr(),interval:0,easeFactor:2.5,repetitions:0})});return promisify(store.transaction)}
+async function seedReviewItems(day){const store=tx('reviewItems','readwrite');const content=getDayContent(day);if(!content)return;let idx=0;content.grammar.forEach(g=>{store.put({id:'g'+day+'_'+idx++,day,type:'grammar',point:g.point,meaning:g.explanation,nextReview:getTodayStr(),interval:0,easeFactor:2.5,repetitions:0})});idx=0;content.vocabulary.forEach(v=>{store.put({id:'v'+day+'_'+idx++,day,type:'vocabulary',word:v.word,meaning:v.meaning,nextReview:getTodayStr(),interval:0,easeFactor:2.5,repetitions:0})});return new Promise(r=>{store.transaction.oncomplete=r;store.transaction.onerror=r})}
 
 async function updateReviewItem(id,updates){const item=await promisify(tx('reviewItems').get(id));if(!item)return;Object.assign(item,updates);return promisify(tx('reviewItems','readwrite').put(item))}
 
@@ -124,35 +124,41 @@ function onNotificationTimeChange(val){state.notificationTime=val;localStorage.s
 async function updateReviewBadge(){const items=await getDueItems();const badge=document.getElementById('reviewBadge');if(items.length>0){badge.textContent=items.length;badge.style.display='flex'}else{badge.style.display='none'}}
 function updateHeaderStreak(){document.getElementById('headerStreak').textContent='🔥 '+state.streak+'天'}
 
-async function switchTab(tab){if(state.activeTab===tab)return;state.activeTab=tab;document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.getElementById('panelToday').style.display=tab==='today'?'block':'none';document.getElementById('panelReview').style.display=tab==='review'?'block':'none';document.getElementById('panelProfile').style.display=tab==='profile'?'block':'none';if(tab==='review')await renderReviewTab();if(tab==='profile')await renderProfileTab();if(tab==='today')updateReviewBadge()}
+async function switchTab(tab){if(state.activeTab===tab)return;state.activeTab=tab;document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.getElementById('panelToday').style.display=tab==='today'?'block':'none';document.getElementById('panelReview').style.display=tab==='review'?'block':'none';document.getElementById('panelProfile').style.display=tab==='profile'?'block':'none';if(!state.db)return;try{if(tab==='review')await renderReviewTab();if(tab==='profile')await renderProfileTab();if(tab==='today')updateReviewBadge()}catch(e){console.error('Tab switch error:',e)}}
 
 function showToast(msg,dur=2000){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');if(state.toastTimer)clearTimeout(state.toastTimer);state.toastTimer=setTimeout(()=>t.classList.remove('show'),dur)}
 
-async function resetAllData(){if(!confirm('确定要重置所有学习数据吗？此操作不可撤销。'))return;const stores=['checkins','reviewItems'];stores.forEach(s=>tx(s,'readwrite').clear());state.checkedInToday=false;state.currentDay=1;state.streak=0;state.longestStreak=0;state.totalDays=0;state.totalReviews=0;document.getElementById('btnCheckin').textContent='✅ 今日打卡';document.getElementById('btnCheckin').classList.remove('checked');document.getElementById('checkinResult').style.display='none';document.getElementById('contentSection').style.display='none';updateHeaderStreak();updateReviewBadge();showToast('🗑️ 数据已重置')}
+async function resetAllData(){if(!confirm('确定要重置所有学习数据吗？此操作不可撤销。'))return;try{await Promise.all(['checkins','reviewItems'].map(s=>promisify(tx(s,'readwrite').clear())));state.checkedInToday=false;state.currentDay=1;state.streak=0;state.longestStreak=0;state.totalDays=0;state.totalReviews=0;document.getElementById('btnCheckin').textContent='✅ 今日打卡';document.getElementById('btnCheckin').classList.remove('checked');document.getElementById('checkinResult').style.display='none';document.getElementById('contentSection').style.display='none';updateHeaderStreak();updateReviewBadge();showToast('🗑️ 数据已重置')}catch(e){showToast('⚠️ 重置失败')}}
 
 async function init(){
-    state.db=await openDB();
-    if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
-    state.notificationTime=localStorage.getItem('notificationTime')||'09:00';
-    const nt=document.getElementById('notificationTime');if(nt)nt.value=state.notificationTime;
-    state.checkedInToday=await isCheckedInToday();
-    state.currentDay=await getCurrentDay();
-    const stats=await calculateStreaks();
-    state.streak=stats.current;state.longestStreak=stats.longest;state.totalDays=stats.total;
-    state.totalReviews=await getTotalReviewCount();
-    const checkins=await getCheckins();state.checkedDates=new Set(checkins.map(c=>c.date));
+    let errMsg='';
+    try{state.db=await openDB()}catch(e){errMsg='数据库初始化失败'}
+    if(state.db){
+        try{
+            state.notificationTime=localStorage.getItem('notificationTime')||'09:00';
+            const nt=document.getElementById('notificationTime');if(nt)nt.value=state.notificationTime;
+            state.checkedInToday=await isCheckedInToday();
+            state.currentDay=await getCurrentDay();
+            const stats=await calculateStreaks();
+            state.streak=stats.current;state.longestStreak=stats.longest;state.totalDays=stats.total;
+            state.totalReviews=await getTotalReviewCount();
+            const checkins=await getCheckins();state.checkedDates=new Set(checkins.map(c=>c.date));
+        }catch(e){console.error('DB read error:',e);errMsg='数据读取失败'}
+    }
     updateHeaderStreak();
-    const btn=document.getElementById('btnCheckin');
+    try{if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js')}catch(e){}
     const content=getDayContent(state.currentDay);
     if(content){document.getElementById('dayTitle').textContent='第 '+state.currentDay+' 天';document.getElementById('dayTheme').textContent=content.title_ko+' — '+content.title_zh} else {document.getElementById('dayTitle').textContent='🎉 已完成全部';document.getElementById('dayTheme').textContent='30天课程学完了！'}
-    if(state.checkedInToday){btn.textContent='✅ 已打卡';btn.classList.add('checked');document.getElementById('checkinResult').style.display='block';document.getElementById('checkinTime').textContent=formatDateCN(new Date());document.getElementById('contentSection').style.display='block';renderDialogue(state.currentDay)}else{btn.textContent='✅ 今日打卡';btn.classList.remove('checked');document.getElementById('checkinResult').style.display='none';document.getElementById('contentSection').style.display='none'}
-    updateReviewBadge();
-    if(Notification.permission==='granted')scheduleDailyNotification();
+    const btn=document.getElementById('btnCheckin');
+    if(state.checkedInToday && state.db){btn.textContent='✅ 已打卡';btn.classList.add('checked');document.getElementById('checkinResult').style.display='block';document.getElementById('checkinTime').textContent=formatDateCN(new Date());document.getElementById('contentSection').style.display='block';renderDialogue(state.currentDay)}
+    if(errMsg){document.getElementById('alertBanner').style.display='block';document.getElementById('alertBanner').innerHTML=errMsg+' <button onclick="location.reload()" style="background:var(--accent);color:#fff;border:0;padding:4px 12px;border-radius:4px;font-size:12px;cursor:pointer;margin-left:8px">刷新重试</button>'}
+    try{updateReviewBadge()}catch(e){}
+    if(Notification.permission==='granted'){try{scheduleDailyNotification()}catch(e){}}
     document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
-    document.addEventListener('visibilitychange',()=>{if(!document.hidden){updateReviewBadge();updateHeaderStreak()}});
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden){try{updateReviewBadge();updateHeaderStreak()}catch(e){}}});
 }
 
-init().catch(e=>{console.error('Init failed:',e);showToast('⚠️ 初始化失败，请刷新页面')});
+init();
 </script>
 </body>
 </html>
