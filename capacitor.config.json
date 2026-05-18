@@ -1,0 +1,22 @@
+{
+  "appId": "com.koreanlearner.app",
+  "appName": "韩语学习",
+  "webDir": "www",
+  "backgroundColor": "#060613",
+  "server": {
+    "androidScheme": "https",
+    "iosScheme": "capacitor",
+    "allowNavigation": []
+  },
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_launcher",
+      "iconColor": "#6c72cb"
+    }
+  }
+}

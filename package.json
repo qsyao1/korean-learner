@@ -1,0 +1,19 @@
+{
+  "name": "korean-learner",
+  "version": "1.0.0",
+  "description": "韩语学习 - 每日跟读，艾宾浩斯记忆复习",
+  "main": "sw.js",
+  "scripts": {
+    "build": "npx cap sync android",
+    "open": "npx cap open android"
+  },
+  "keywords": ["korean", "learning", "pwa"],
+  "author": "qsyao1",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^8.3.4",
+    "@capacitor/cli": "^8.3.4",
+    "@capacitor/core": "^8.3.4",
+    "@capacitor/local-notifications": "^8.0.0"
+  }
+}
