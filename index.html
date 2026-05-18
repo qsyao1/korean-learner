@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#060613">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="韩语学习">
+    <title>韩语学习</title>
+    <link rel="manifest" href="manifest.json">
+    <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--bg:#060613;--bg-card:#111130;--bg-card-hover:#161640;--bg-input:#1a1a40;--text:#e4e4f0;--text-secondary:#8888b0;--text-muted:#5a5a80;--border:#222250;--accent:#6c72cb;--accent-bright:#8899ee;--checkin-green:#3cb878;--hard-red:#e74c3c;--good-orange:#f39c12;--easy-green:#2ecc71;--speaker-a:#6c72cb;--speaker-b:#3cb878;--radius:16px;--radius-sm:10px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;--shadow:0 4px 24px rgba(0,0,0,.3)}html,body{height:100%}body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,16px)}#app{max-width:480px;margin:0 auto;padding:16px 16px 90px;min-height:100vh}.header{display:flex;align-items:center;justify-content:space-between;padding:8px 0 16px}.header-title{font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--accent-bright),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.header-streak{font-size:14px;color:var(--checkin-green);background:rgba(60,184,120,.12);padding:4px 12px;border-radius:20px}.btn-install{font-size:12px;color:var(--accent-bright);background:0;border:1px solid var(--accent);border-radius:20px;padding:6px 14px;cursor:pointer}.btn-install:active{background:var(--accent);color:#fff}.alert-banner{background:rgba(243,156,18,.15);color:#f39c12;padding:10px 14px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:12px;display:none}.card{background:var(--bg-card);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);transition:background .2s}.card-title{font-size:16px;font-weight:700;margin-bottom:14px;color:var(--accent-bright)}.tab-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#0a0a1a;border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 calc(env(safe-area-inset-bottom,8px));z-index:100}.tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:0;border:0;color:var(--text-muted);font-size:11px;cursor:pointer;position:relative;padding:4px 0;transition:color .2s}.tab-btn.active{color:var(--accent-bright)}.tab-icon{font-size:22px}.tab-badge{position:absolute;top:-2px;right:calc(50% - 24px);background:var(--hard-red);color:#fff;font-size:10px;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 5px;display:none}.checkin-card{text-align:center;padding:28px 18px}.day-title{font-size:28px;font-weight:800;color:var(--text);margin-bottom:4px}.day-theme{font-size:14px;color:var(--text-secondary);margin-bottom:20px}.btn-checkin{width:100%;max-width:260px;padding:16px;font-size:18px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--accent-bright),#a78bfa);border:0;border-radius:30px;cursor:pointer;transition:all .3s;animation:pulse 2s infinite}.btn-checkin:active{transform:scale(.96)}.btn-checkin.checked{animation:none;background:var(--checkin-green);opacity:.7;cursor:default}.btn{display:inline-block;padding:12px 24px;font-size:15px;font-weight:600;border-radius:25px;border:0;cursor:pointer;transition:all .2s}.btn:active{transform:scale(.95)}.btn-danger{background:0;color:var(--hard-red);border:1px solid var(--hard-red);margin-top:12px;font-size:13px;padding:8px 18px}.checkin-result{font-size:14px;color:var(--checkin-green);margin-top:12px}.checkin-time{display:block;font-size:12px;color:var(--text-muted);margin-top:4px}.content-section{margin-top:6px}.dialogue-container{display:flex;flex-direction:column;gap:12px}.dialogue-bubble{max-width:88%;padding:12px 14px;border-radius:14px;position:relative}.dialogue-bubble.speaker-a{align-self:flex-start;background:rgba(108,114,203,.15);border-left:3px solid var(--speaker-a)}.dialogue-bubble.speaker-b{align-self:flex-end;background:rgba(60,184,120,.12);border-right:3px solid var(--speaker-b);text-align:right}.dialogue-speaker{font-size:11px;color:var(--text-muted);margin-bottom:4px}.dialogue-ko{font-size:17px;line-height:1.4;margin-bottom:4px}.dialogue-zh{font-size:13px;color:var(--text-secondary);line-height:1.3}.btn-play{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);border:0;color:var(--accent-bright);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}.btn-play:active{background:rgba(255,255,255,.2)}.btn-play.playing{background:var(--accent);color:#fff}.grammar-item{border-bottom:1px solid var(--border);padding:14px 0}.grammar-item:last-child{border-bottom:0}.grammar-point{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}.grammar-explain{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px}.grammar-examples{font-size:13px;color:var(--text-muted);line-height:1.6;padding-left:12px;border-left:2px solid var(--border)}.vocab-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}.vocab-row:last-child{border-bottom:0}.btn-play-sm{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:0;color:var(--accent-bright);font-size:14px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}.btn-play-sm:active{background:var(--accent)}.vocab-word{font-size:16px;font-weight:600;min-width:90px}.vocab-meaning{font-size:14px;color:var(--text-secondary);flex:1}.vocab-pos{font-size:11px;color:var(--text-muted);background:rgba(255,255,255,.05);padding:2px 8px;border-radius:4px}.review-count{font-size:15px;color:var(--text-secondary)}.flashcard-area{display:flex;flex-direction:column;align-items:center;gap:20px;padding:20px 0;perspective:1000px}.flashcard{width:100%;max-width:300px;height:200px;cursor:pointer}.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}.flashcard-front,.flashcard-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;background:var(--bg-card);box-shadow:var(--shadow)}.flashcard-back{transform:rotateY(180deg);background:linear-gradient(135deg,var(--bg-card),#1a1a50)}.flashcard-front .card-ko{font-size:26px;font-weight:700}.flashcard-front .card-hint{font-size:12px;color:var(--text-muted);margin-top:12px}.flashcard-back .card-zh{font-size:22px;color:var(--accent-bright);font-weight:600}.flashcard-back .card-extra{font-size:13px;color:var(--text-secondary);margin-top:8px}.review-progress{font-size:14px;color:var(--text-muted)}.assessment-buttons{display:flex;gap:10px;width:100%;max-width:320px}.assessment-buttons .btn{flex:1;font-size:14px;padding:14px 0;text-align:center;border-radius:14px;background:0;border:2px solid}.btn-hard{border-color:var(--hard-red)!important;color:var(--hard-red)}.btn-good{border-color:var(--good-orange)!important;color:var(--good-orange)}.btn-easy{border-color:var(--easy-green)!important;color:var(--easy-green)}.btn-hard:active{background:var(--hard-red)!important;color:#fff}.btn-good:active{background:var(--good-orange)!important;color:#fff}.btn-easy:active{background:var(--easy-green)!important;color:#fff}.review-empty,.review-complete{text-align:center;padding:40px 0;display:none}.review-empty .empty-icon,.review-complete .complete-icon{font-size:56px;margin-bottom:16px}.review-empty .empty-text,.review-complete .complete-text{font-size:18px;font-weight:600;margin-bottom:8px}.review-empty .empty-subtext,.review-complete .complete-stats{font-size:13px;color:var(--text-secondary)}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.stat-item{text-align:center;background:rgba(255,255,255,.03);padding:16px 10px;border-radius:var(--radius-sm)}.stat-value{display:block;font-size:28px;font-weight:800;color:var(--accent-bright)}.stat-label{display:block;font-size:12px;color:var(--text-muted);margin-top:4px}.calendar-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.calendar-month{font-size:15px;font-weight:600}.btn-cal-nav{background:0;border:1px solid var(--border);color:var(--text-secondary);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12px}.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.calendar-day-header{font-size:11px;color:var(--text-muted);padding:6px 0}.calendar-day{font-size:13px;padding:8px 0;border-radius:8px;position:relative;color:var(--text-secondary)}.calendar-day.today{border:1px solid var(--accent);color:#fff;font-weight:600}.calendar-day.checked{color:#fff}.calendar-day.checked::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--checkin-green)}.calendar-day.other-month{color:var(--text-muted);opacity:.3}.settings-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0}.settings-row span{font-size:14px}.settings-row input{background:var(--bg-input);border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:var(--radius-sm);font-size:14px;font-family:var(--font)}.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(100%);background:var(--bg-card);color:var(--text);padding:12px 24px;border-radius:25px;font-size:14px;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:200;transition:transform .3s;white-space:nowrap}.toast.show{transform:translateX(-50%) translateY(0)}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(136,153,238,.4)}50%{box-shadow:0 0 0 12px rgba(136,153,238,0)}}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeIn .3s ease}@keyframes spark{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}.spark{animation:spark .4s ease}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}.shake{animation:shake .4s ease}</style>
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <span class="header-title">🇰🇷 韩语学习</span>
+        <span class="header-streak" id="headerStreak">🔥 0天</span>
+    </div>
+    <div class="tab-panel" id="panelToday">
+        <div class="card checkin-card" id="checkinSection">
+            <div class="day-title" id="dayTitle">第 1 天</div>
+            <div class="day-theme" id="dayTheme">初次见面</div>
+            <button class="btn-checkin" id="btnCheckin" onclick="handleCheckin()">✅ 今日打卡</button>
+            <div class="checkin-result" id="checkinResult" style="display:none"><span>✅ 已打卡</span><span class="checkin-time" id="checkinTime"></span></div>
+        </div>
+        <div class="content-section" id="contentSection" style="display:none">
+            <div class="card"><div class="card-title">📝 对话练习</div><div class="dialogue-container" id="dialogueContainer"></div></div>
+            <div class="card"><div class="card-title">📖 语法解析</div><div id="grammarContainer"></div></div>
+            <div class="card"><div class="card-title">📚 单词学习</div><div id="vocabContainer"></div></div>
+        </div>
+    </div>
+    <div class="tab-panel" id="panelReview" style="display:none">
+        <div class="review-header" id="reviewHeader" style="margin-bottom:14px"><span class="review-count" id="reviewCount">今日复习: 0 项</span></div>
+        <div class="flashcard-area" id="flashcardArea" style="display:none">
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="flashcard-inner"><div class="flashcard-front"><div class="card-ko" id="cardFrontText"></div><div class="card-hint">点击翻转查看答案</div></div>
+                <div class="flashcard-back"><div class="card-zh" id="cardBackText"></div><div class="card-extra" id="cardExtra"></div></div></div>
+            </div>
+            <div class="review-progress" id="reviewProgress">0/0</div>
+            <div class="assessment-buttons" id="assessmentButtons" style="display:none">
+                <button class="btn btn-hard" onclick="handleReview(0)">😰<br>忘记了</button>
+                <button class="btn btn-good" onclick="handleReview(1)">😊<br>记得</button>
+                <button class="btn btn-easy" onclick="handleReview(2)">😎<br>太简单</button>
+            </div>
+        </div>
+        <div class="review-empty" id="reviewEmpty"><div class="empty-icon">🎉</div><div class="empty-text">今日没有复习任务</div><div class="empty-subtext">完成打卡后回来复习吧</div></div>
+        <div class="review-complete" id="reviewComplete" style="display:none"><div class="complete-icon">🎊</div><div class="complete-text">复习完成！</div><div class="complete-stats" id="completeStats"></div></div>
+    </div>
+    <div class="tab-panel" id="panelProfile" style="display:none">
+        <div class="card"><div class="card-title">🔥 学习统计</div><div class="stats-grid">
+            <div class="stat-item"><span class="stat-value" id="statCurrentStreak">0</span><span class="stat-label">当前连续</span></div>
+            <div class="stat-item"><span class="stat-value" id="statLongestStreak">0</span><span class="stat-label">最长连续</span></div>
+            <div class="stat-item"><span class="stat-value" id="statTotalDays">0</span><span class="stat-label">学习天数</span></div>
+            <div class="stat-item"><span class="stat-value" id="statTotalReviews">0</span><span class="stat-label">复习次数</span></div>
+        </div></div>
+        <div class="card"><div class="card-title">📅 打卡日历</div>
+            <div class="calendar-nav"><button class="btn-cal-nav" onclick="changeMonth(-1)">◀</button><span class="calendar-month" id="calendarMonth"></span><button class="btn-cal-nav" onclick="changeMonth(1)">▶</button></div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+        <div class="card"><div class="card-title">⚙️ 设置</div>
+            <div class="settings-row"><span>每日提醒时间</span><input type="time" id="notificationTime" value="09:00" onchange="onNotificationTimeChange(this.value)"></div>
+            <button class="btn btn-danger" onclick="resetAllData()">🗑️ 重置所有数据</button>
+        </div>
+    </div>
+</div>
+<nav class="tab-bar">
+    <button class="tab-btn active" data-tab="today"><span class="tab-icon">📖</span><span class="tab-label">今日学习</span></button>
+    <button class="tab-btn" data-tab="review"><span class="tab-icon">🔄</span><span class="tab-label">复习</span><span class="tab-badge" id="reviewBadge">0</span></button>
+    <button class="tab-btn" data-tab="profile"><span class="tab-icon">👤</span><span class="tab-label">我的</span></button>
+</nav>
+<div class="toast" id="toast"></div>
+<script src="content.js"></script>
+<script>
+const DB_NAME = 'korean-learner', DB_VER = 1;
+const state = { db: null, activeTab: 'today', currentDay: 1, checkedInToday: false, dueItems: [], reviewIdx: 0, cardFlipped: false, streak: 0, longestStreak: 0, totalDays: 0, totalReviews: 0, isSpeaking: false, notificationTime: '09:00', calYear: 2026, calMonth: 4, toastTimer: null, notifTimer: null };
+
+function openDB(){return new Promise((r,rej)=>{const req=indexedDB.open(DB_NAME,DB_VER);req.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains('checkins'))db.createObjectStore('checkins',{keyPath:'date'});if(!db.objectStoreNames.contains('reviewItems')){const s=db.createObjectStore('reviewItems',{keyPath:'id'});s.createIndex('nextReview','nextReview');}};req.onsuccess=e=>r(e.target.result);req.onerror=()=>rej(req.error)})}
+
+function tx(store,mode='readonly'){return state.db.transaction(store,mode).objectStore(store)}
+function promisify(req){return new Promise((r,rej)=>{req.onsuccess=()=>r(req.result);req.onerror=()=>rej(req.error)})}
+
+async function addCheckin(dateStr,day){return promisify(tx('checkins','readwrite').put({date:dateStr,day,timestamp:Date.now()}))}
+async function getCheckins(){return promisify(tx('checkins').getAll())}
+async function isCheckedInToday(){const r=await promisify(tx('checkins').get(getTodayStr()));return!!r}
+async function calculateStreaks(){const checkins=await getCheckins();if(!checkins.length)return{current:0,longest:0,total:0};const dates=[...new Set(checkins.map(c=>c.date))].sort();let cur=1,longest=1,total=dates.length;for(let i=1;i<dates.length;i++){const prev=new Date(dates[i-1]),curr=new Date(dates[i]);if((curr-prev)/86400000===1)cur++;else{longest=Math.max(longest,cur);cur=1}}longest=Math.max(longest,cur);const today=new Date(getTodayStr()),last=new Date(dates[dates.length-1]);if((today-last)/86400000>1)cur=0;return{current:cur,longest,total}}
+
+async function getDueItems(){const today=getTodayStr();const all=await promisify(tx('reviewItems').getAll());return all.filter(i=>i.nextReview<=today)}
+async function getTotalReviewCount(){return(await promisify(tx('reviewItems').getAll())).length}
+
+async function seedReviewItems(day){const store=tx('reviewItems','readwrite');const content=getDayContent(day);if(!content)return;let idx=0;content.grammar.forEach(g=>{store.put({id:'g'+day+'_'+idx++,day,type:'grammar',point:g.point,meaning:g.explanation,nextReview:getTodayStr(),interval:0,easeFactor:2.5,repetitions:0})});idx=0;content.vocabulary.forEach(v=>{store.put({id:'v'+day+'_'+idx++,day,type:'vocabulary',word:v.word,meaning:v.meaning,nextReview:getTodayStr(),interval:0,easeFactor:2.5,repetitions:0})});return promisify(store.transaction)}
+
+async function updateReviewItem(id,updates){const item=await promisify(tx('reviewItems').get(id));if(!item)return;Object.assign(item,updates);return promisify(tx('reviewItems','readwrite').put(item))}
+
+function calcSM2(quality,item){let{interval,easeFactor,repetitions}=item;if(quality===0){repetitions=0;interval=1;easeFactor=Math.max(1.3,easeFactor-.2)}else if(quality===1){repetitions+=1;if(repetitions===1)interval=1;else if(repetitions===2)interval=2;else interval=Math.round(interval*easeFactor)}else{repetitions+=1;if(repetitions===1)interval=1;else if(repetitions===2)interval=2;else interval=Math.round(interval*easeFactor*1.3);easeFactor=Math.min(3,easeFactor+.15)}interval=Math.min(30,Math.max(1,interval));const d=new Date();d.setDate(d.getDate()+interval);return{interval,easeFactor,repetitions,nextReview:d.toISOString().split('T')[0]}}
+
+function getTodayStr(){return new Date().toISOString().split('T')[0]}
+function getDayContent(day){return KOREAN_CONTENT[day-1]||null}
+async function getCurrentDay(){const checkins=await getCheckins();return Math.min(30,(new Set(checkins.map(c=>c.date))).size+1)}
+function formatDateCN(d){return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日'}
+
+async function handleCheckin(){if(state.checkedInToday)return;const day=state.currentDay;await addCheckin(getTodayStr(),day);state.checkedInToday=true;const btn=document.getElementById('btnCheckin');btn.textContent='✅ 已打卡';btn.classList.add('checked');btn.classList.add('spark');document.getElementById('checkinResult').style.display='block';document.getElementById('checkinTime').textContent=formatDateCN(new Date());await seedReviewItems(day);document.getElementById('contentSection').style.display='block';renderDialogue(day);requestNotificationPermission();const{current,longest,total}=await calculateStreaks();state.streak=current;state.longestStreak=Math.max(state.longestStreak,longest);state.totalDays=total;updateHeaderStreak();updateReviewBadge();showToast('✅ 打卡成功！')}
+
+function renderDialogue(day){const content=getDayContent(day);if(!content)return;const c=document.getElementById('dialogueContainer');c.innerHTML=content.dialogue.map((d,i)=>`<div class="dialogue-bubble speaker-${d.speaker.toLowerCase()}"><div class="dialogue-speaker">${d.speaker}</div><div class="dialogue-ko">${d.ko}</div><div class="dialogue-zh">${d.zh}</div><button class="btn-play${i===0?' playing':''}" onclick="event.stopPropagation();playText('${d.ko.replace(/'/g,"\\'")}',this)">🔊</button></div>`).join('');renderGrammar(day);renderVocabulary(day)}
+function renderGrammar(day){const content=getDayContent(day);if(!content)return;const c=document.getElementById('grammarContainer');c.innerHTML=content.grammar.map(g=>`<div class="grammar-item"><div class="grammar-point">${g.point}</div><div class="grammar-explain">${g.explanation}</div><div class="grammar-examples">${g.examples.map(e=>'• <b>'+e.ko+'</b> — '+e.zh).join('<br>')}</div></div>`).join('')}
+function renderVocabulary(day){const content=getDayContent(day);if(!content)return;const c=document.getElementById('vocabContainer');c.innerHTML=content.vocabulary.map((v,i)=>`<div class="vocab-row"><button class="btn-play-sm" onclick="playText('${v.word.replace(/'/g,"\\'")}',this)">🔊</button><span class="vocab-word">${v.word}</span><span class="vocab-meaning">${v.meaning}</span><span class="vocab-pos">${v.pos}</span></div>`).join('')}
+
+async function renderReviewTab(){const items=await getDueItems();state.dueItems=items;state.reviewIdx=0;state.cardFlipped=false;if(!items.length){document.getElementById('flashcardArea').style.display='none';document.getElementById('reviewEmpty').style.display='block';document.getElementById('reviewComplete').style.display='none';document.getElementById('reviewCount').textContent='今日复习: 0 项';return}document.getElementById('flashcardArea').style.display='flex';document.getElementById('reviewEmpty').style.display='none';document.getElementById('reviewComplete').style.display='none';document.getElementById('assessmentButtons').style.display='none';document.getElementById('reviewCount').textContent='今日复习: '+items.length+' 项';renderFlashcard(0)}
+function renderFlashcard(i){if(i>=state.dueItems.length)return finishReview();const item=state.dueItems[i];state.reviewIdx=i;state.cardFlipped=false;const flashcard=document.getElementById('flashcard');flashcard.classList.remove('flipped');document.getElementById('assessmentButtons').style.display='none';if(item.type==='vocabulary'){document.getElementById('cardFrontText').textContent=item.word;document.getElementById('cardBackText').textContent=item.meaning;document.getElementById('cardExtra').textContent=''}else{document.getElementById('cardFrontText').textContent=item.point;document.getElementById('cardBackText').textContent=item.meaning;document.getElementById('cardExtra').textContent='语法点'}document.getElementById('reviewProgress').textContent=(i+1)+'/'+state.dueItems.length;flashcard.classList.add('fade-in');setTimeout(()=>flashcard.classList.remove('fade-in'),300)}
+function flipCard(){if(state.cardFlipped)return;state.cardFlipped=true;document.getElementById('flashcard').classList.add('flipped');document.getElementById('assessmentButtons').style.display='flex'}
+async function handleReview(quality){const item=state.dueItems[state.reviewIdx];const sm2=calcSM2(quality,item);await updateReviewItem(item.id,sm2);state.totalReviews++;if(state.reviewIdx+1>=state.dueItems.length){finishReview()}else{setTimeout(()=>renderFlashcard(state.reviewIdx+1),300)}}
+function finishReview(){document.getElementById('flashcardArea').style.display='none';const c=document.getElementById('reviewComplete');c.style.display='block';document.getElementById('completeStats').textContent='今日完成 '+state.dueItems.length+' 项复习';document.getElementById('reviewCount').textContent='今日复习: 0 项';updateReviewBadge();c.classList.add('fade-in')}
+
+async function renderProfileTab(){const stats=await calculateStreaks();state.streak=stats.current;state.longestStreak=Math.max(state.longestStreak,stats.longest);state.totalDays=stats.total;state.totalReviews=await getTotalReviewCount();document.getElementById('statCurrentStreak').textContent=stats.current;document.getElementById('statLongestStreak').textContent=state.longestStreak;document.getElementById('statTotalDays').textContent=stats.total;document.getElementById('statTotalReviews').textContent=state.totalReviews;renderCalendar();updateHeaderStreak()}
+function renderCalendar(){const now=new Date(),y=state.calYear,m=state.calMonth;document.getElementById('calendarMonth').textContent=y+'年'+(m+1)+'月';const grid=document.getElementById('calendarGrid');const headers=['日','一','二','三','四','五','六'];let html=headers.map(h=>'<div class="calendar-day-header">'+h+'</div>').join('');const firstDay=new Date(y,m,1).getDay(),lastDate=new Date(y,m+1,0).getDate();const checkinDates=new Set(state.checkedDates||[]);for(let i=0;i<firstDay;i++)html+='<div class="calendar-day other-month"></div>';for(let d=1;d<=lastDate;d++){const ds=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');let cls='calendar-day';if(d===now.getDate()&&m===now.getMonth()&&y===now.getFullYear())cls+=' today';if(checkinDates.has(ds))cls+=' checked';html+='<div class="'+cls+'">'+d+'</div>'}grid.innerHTML=html}
+async function changeMonth(delta){state.calMonth+=delta;if(state.calMonth<0){state.calMonth=11;state.calYear--}else if(state.calMonth>11){state.calMonth=0;state.calYear++}const checkins=await getCheckins();state.checkedDates=new Set(checkins.map(c=>c.date));renderCalendar()}
+
+function playText(text,btnEl){if(!text)return;if(state.isSpeaking){speechSynthesis.cancel();state.isSpeaking=false;if(btnEl){btnEl.classList.remove('playing')}return}const u=new SpeechSynthesisUtterance(text);u.lang='ko-KR';u.rate=.85;if(btnEl)btnEl.classList.add('playing');u.onstart=()=>state.isSpeaking=true;u.onend=u.onerror=()=>{state.isSpeaking=false;if(btnEl)btnEl.classList.remove('playing')};const voices=speechSynthesis.getVoices();const kv=voices.find(v=>v.lang.startsWith('ko'));if(kv)u.voice=kv;speechSynthesis.speak(u)}
+
+async function requestNotificationPermission(){if(!('Notification' in window))return false;if(Notification.permission==='granted')return true;if(Notification.permission==='denied')return false;const r=await Notification.requestPermission();if(r==='granted')scheduleDailyNotification();return r==='granted'}
+function scheduleDailyNotification(){if(state.notifTimer)clearTimeout(state.notifTimer);const time=state.notificationTime||'09:00';const[h,m]=time.split(':').map(Number);const now=new Date();const t=new Date(now);t.setHours(h,m,0,0);if(t<=now)t.setDate(t.getDate()+1);const ms=t.getTime()-now.getTime();state.notifTimer=setTimeout(async()=>{if(Notification.permission==='granted'&&!(await isCheckedInToday())){new Notification('🇰🇷 韩语学习 - 每日跟读',{body:'新的一天开始了！快来学习今天的内容吧~',tag:'korean-daily',requireInteraction:true,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="60" text-anchor="middle" x="50">🇰🇷</text></svg>'})}scheduleDailyNotification()},ms)}
+function onNotificationTimeChange(val){state.notificationTime=val;localStorage.setItem('notificationTime',val);scheduleDailyNotification();showToast('⏰ 提醒时间已更新')}
+
+async function updateReviewBadge(){const items=await getDueItems();const badge=document.getElementById('reviewBadge');if(items.length>0){badge.textContent=items.length;badge.style.display='flex'}else{badge.style.display='none'}}
+function updateHeaderStreak(){document.getElementById('headerStreak').textContent='🔥 '+state.streak+'天'}
+
+async function switchTab(tab){if(state.activeTab===tab)return;state.activeTab=tab;document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.getElementById('panelToday').style.display=tab==='today'?'block':'none';document.getElementById('panelReview').style.display=tab==='review'?'block':'none';document.getElementById('panelProfile').style.display=tab==='profile'?'block':'none';if(tab==='review')await renderReviewTab();if(tab==='profile')await renderProfileTab();if(tab==='today')updateReviewBadge()}
+
+function showToast(msg,dur=2000){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');if(state.toastTimer)clearTimeout(state.toastTimer);state.toastTimer=setTimeout(()=>t.classList.remove('show'),dur)}
+
+async function resetAllData(){if(!confirm('确定要重置所有学习数据吗？此操作不可撤销。'))return;const stores=['checkins','reviewItems'];stores.forEach(s=>tx(s,'readwrite').clear());state.checkedInToday=false;state.currentDay=1;state.streak=0;state.longestStreak=0;state.totalDays=0;state.totalReviews=0;document.getElementById('btnCheckin').textContent='✅ 今日打卡';document.getElementById('btnCheckin').classList.remove('checked');document.getElementById('checkinResult').style.display='none';document.getElementById('contentSection').style.display='none';updateHeaderStreak();updateReviewBadge();showToast('🗑️ 数据已重置')}
+
+async function init(){
+    state.db=await openDB();
+    if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+    state.notificationTime=localStorage.getItem('notificationTime')||'09:00';
+    const nt=document.getElementById('notificationTime');if(nt)nt.value=state.notificationTime;
+    state.checkedInToday=await isCheckedInToday();
+    state.currentDay=await getCurrentDay();
+    const stats=await calculateStreaks();
+    state.streak=stats.current;state.longestStreak=stats.longest;state.totalDays=stats.total;
+    state.totalReviews=await getTotalReviewCount();
+    const checkins=await getCheckins();state.checkedDates=new Set(checkins.map(c=>c.date));
+    updateHeaderStreak();
+    const btn=document.getElementById('btnCheckin');
+    const content=getDayContent(state.currentDay);
+    if(content){document.getElementById('dayTitle').textContent='第 '+state.currentDay+' 天';document.getElementById('dayTheme').textContent=content.title_ko+' — '+content.title_zh} else {document.getElementById('dayTitle').textContent='🎉 已完成全部';document.getElementById('dayTheme').textContent='30天课程学完了！'}
+    if(state.checkedInToday){btn.textContent='✅ 已打卡';btn.classList.add('checked');document.getElementById('checkinResult').style.display='block';document.getElementById('checkinTime').textContent=formatDateCN(new Date());document.getElementById('contentSection').style.display='block';renderDialogue(state.currentDay)}else{btn.textContent='✅ 今日打卡';btn.classList.remove('checked');document.getElementById('checkinResult').style.display='none';document.getElementById('contentSection').style.display='none'}
+    updateReviewBadge();
+    if(Notification.permission==='granted')scheduleDailyNotification();
+    document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden){updateReviewBadge();updateHeaderStreak()}});
+}
+
+init().catch(e=>{console.error('Init failed:',e);showToast('⚠️ 初始化失败，请刷新页面')});
+</script>
+</body>
+</html>
